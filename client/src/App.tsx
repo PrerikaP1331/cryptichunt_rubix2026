@@ -138,7 +138,10 @@ function App() {
         body: JSON.stringify(form),
       })
 
-      const data = await response.json()
+      const contentType = response.headers.get('content-type') ?? ''
+      const data = contentType.includes('application/json')
+        ? await response.json()
+        : { error: 'The API is not connected. Set VITE_API_BASE_URL to your Render backend URL and redeploy Vercel.' }
       if (!response.ok) {
         throw new Error(data.error || 'Authentication failed.')
       }
