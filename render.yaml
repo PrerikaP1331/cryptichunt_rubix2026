@@ -2,7 +2,7 @@ services:
   - type: web
     name: rubix-cryptic-hunt
     runtime: node
-    buildCommand: npm ci
+    buildCommand: npm ci && npm --prefix client ci && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:
