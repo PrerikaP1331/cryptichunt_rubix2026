@@ -4,8 +4,6 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { randomBytes } from 'crypto';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 dotenv.config();
 
@@ -13,7 +11,10 @@ const app = express();
 const PORT = Number(process.env.PORT || 4000);
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || '';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
-const DIST_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../dist');
+const CLIENT_ORIGINS = (process.env.CLIENT_ORIGIN || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 
 const LEVELS = [
     { id: 1, answer: 'lantern' },
@@ -32,7 +33,12 @@ const ROUND_POINTS = [20, 25, 30, 35, 40, 45, 50, 55, 60, 100];
 
 const inMemoryUsers = [];
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+    origin(origin, callback) {
+        callback(null, !origin || CLIENT_ORIGINS.includes(origin));
+    },
+    credentials: true,
+}));
 app.use(express.json());
 
 const userSchema = new mongoose.Schema(
@@ -421,14 +427,6 @@ app.get('/api/admin/leaderboard', authenticate, requireAdmin, async (req, res) =
 
 app.get('/api/leaderboard', (req, res) => {
     return res.status(403).json({ error: 'Forbidden: participant leaderboard access is disabled.' });
-});
-
-app.use(express.static(DIST_PATH));
-app.use((req, res, next) => {
-    if (req.method !== 'GET' || req.path.startsWith('/api/')) return next();
-    return res.sendFile(path.join(DIST_PATH, 'index.html'), (error) => {
-        if (error) next(error);
-    });
 });
 
 app.use((error, req, res, next) => {
