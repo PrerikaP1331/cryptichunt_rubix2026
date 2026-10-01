@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm --prefix client run dev",
-    "build": "npm --prefix client run build",
+    "build": "npm --prefix client ci && npm --prefix client run build",
     "preview": "npm --prefix client run preview",
     "server": "node server/index.js",
     "dev:server": "node --watch server/index.js",
