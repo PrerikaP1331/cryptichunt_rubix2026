@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #f5efff;
+  background: #100d22;
+  font-synthesis: none;
+  --ink: #f5efff;
+  --muted: #b5accd;
+  --line: rgba(187, 168, 232, .24);
+  --paper: #1c1534;
+  --moss: #67eee2;
+  --moss-dark: #192a50;
+  --gold: #ffd884;
+  --red: #ff7caa;
+}
+
+* { box-sizing: border-box; }
+
+html { min-width: 320px; background: #100d22; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background: linear-gradient(180deg, #100d22 0%, #1c1538 58%, #35204e 100%);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+body::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  opacity: .72;
+  background-image:
+    radial-gradient(1.5px 1.5px at 8% 13%, #fff 55%, transparent 100%),
+    radial-gradient(1px 1px at 19% 38%, #ffd884 55%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 31% 9%, #d4c5ff 55%, transparent 100%),
+    radial-gradient(1px 1px at 42% 27%, #fff 55%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 57% 12%, #ff9bc6 55%, transparent 100%),
+    radial-gradient(1px 1px at 69% 34%, #fff 55%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 82% 17%, #b7f8ef 55%, transparent 100%),
+    radial-gradient(1px 1px at 93% 42%, #ffd884 55%, transparent 100%),
+    radial-gradient(1px 1px at 12% 73%, #fff 55%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 28% 87%, #ff9bc6 55%, transparent 100%),
+    radial-gradient(1px 1px at 49% 68%, #d4c5ff 55%, transparent 100%),
+    radial-gradient(1px 1px at 73% 81%, #fff 55%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 89% 69%, #b7f8ef 55%, transparent 100%);
+  background-size: 100% 100%;
+}
+
+#root { position: relative; z-index: 1; min-height: 100vh; }
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.app-shell, .admin-shell { min-height: 100vh; background: transparent; }
+.topbar, .admin-topbar {
+  min-height: 72px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(17, 13, 35, .9);
+  backdrop-filter: blur(12px);
+}
+.brand { color: #fff; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; }
+.brand-mark { border-color: var(--moss); box-shadow: 0 0 16px rgba(103, 238, 226, .24); }
+.brand-mark span { background: var(--gold); }
+.topbar-meta, .admin-session { color: #c6bddc; }
+.team-chip, .nav-timer { color: #fff; }
+.online-dot { background: var(--moss); box-shadow: 0 0 12px rgba(103, 238, 226, .7); }
+.topbar-divider { background: var(--line); }
+
+.game-layout { grid-template-columns: 278px minmax(0, 1fr); }
+.level-sidebar {
+  border-color: var(--line);
+  background: rgba(18, 14, 37, .58);
+}
+.side-heading, .panel-label, .answer-label, .table-heading { color: #c2b8dc; }
+.level-count, .eyebrow, .solved-label { color: var(--moss); }
+.progress-track { background: rgba(255, 255, 255, .12); }
+.progress-track span { background: linear-gradient(90deg, var(--moss), #9d89ff); }
+.level-item { color: #aaa0c2; }
+.level-item:hover:not(:disabled), .level-item.active { color: #fff; background: rgba(119, 91, 176, .2); }
+.level-item.active { border-left-color: var(--gold); }
+.level-item.solved { color: var(--moss); }
+.level-item.locked { opacity: .42; }
+.side-footer { color: var(--moss); }
+.puzzle-main { max-width: 1050px; }
+.eyebrow { font-family: 'DM Mono', monospace; letter-spacing: .12em; }
+.eyebrow span { background: var(--gold); }
+.text-button, .icon-button { color: #c8bfdc; }
+.text-button:hover { color: var(--moss); }
+.puzzle-intro { margin-top: 64px; }
+.intro-number { color: var(--gold); font-family: 'Press Start 2P', monospace; font-size: 28px; line-height: 1.5; }
+h1 { color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 42px; font-weight: 700; line-height: 1.08; letter-spacing: 0; }
+.puzzle-intro p { color: #c5badb; }
+.puzzle-intro .direction { border-color: var(--moss); color: #f4efff; }
+.direction span { color: var(--gold); }
+.cipher-panel {
+  border: 1px solid rgba(103, 238, 226, .3);
+  background: rgba(25, 19, 49, .86);
+  box-shadow: 0 14px 40px rgba(5, 4, 18, .22);
+}
+.panel-label svg { color: var(--moss); }
+.cipher-text {
+  color: #e5dcff;
+  background: rgba(8, 8, 25, .55);
+  border: 1px solid rgba(185, 157, 255, .16);
+}
+.panel-footer { color: #aaa0c2; }
+.copy-button { color: var(--moss); }
+.copy-button:hover { color: var(--gold); }
+.answer-label { color: #fff; }
+.answer-row { border-color: rgba(208, 193, 239, .5); }
+.answer-row:focus-within { border-color: var(--moss); }
+.answer-row.is-correct { border-color: var(--moss); }
+.answer-row.is-wrong { border-color: var(--red); }
+.answer-row input { color: #fff; }
+.answer-row input::placeholder { color: #8f86a8; }
+.answer-row button, .next-button, .export-button, .primary-button {
+  color: #120f28;
+  background: var(--moss);
+  border: 1px solid #9bfff4;
+  box-shadow: 0 4px 0 #387b85;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+  transition: transform .16s ease, filter .16s ease;
+}
+.answer-row button:hover, .next-button:hover, .export-button:hover, .primary-button:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.answer-row button:disabled { color: #b9b2c8; background: #554c66; border-color: #716881; box-shadow: none; }
+.feedback.success { color: var(--moss); }
+.feedback.error { color: var(--red); }
+.hint-button { color: var(--gold); }
+.hint-copy { color: #c5badb; }
+.puzzle-note { border-color: var(--line); color: #aaa0c2; }
+
+.admin-shell { color: var(--ink); }
+.admin-main { max-width: 1280px; }
+.admin-heading h1 { font-size: 42px; }
+.admin-heading p { color: var(--muted); }
+.admin-session { color: var(--moss); }
+.admin-stats { border-color: var(--line); background: var(--line); }
+.admin-stats > div { background: rgba(28, 21, 52, .92); }
+.admin-stats svg { color: var(--gold); }
+.admin-stats span { color: var(--muted); }
+.admin-stats strong { color: #fff; font-family: 'Space Grotesk', sans-serif; }
+.results-table-wrap { overflow-x: auto; border-color: rgba(103, 238, 226, .3); background: rgba(28, 21, 52, .92); }
+.table-heading { border-color: var(--line); color: #fff; }
+.private-badge { color: var(--moss); }
+.results-table-wrap th, .results-table-wrap td { border-color: var(--line); color: #eee8fb; }
+.results-table-wrap th { color: #b5accd; }
+.team-name { color: #fff; }
+.rank { color: var(--moss); background: rgba(103, 238, 226, .13); }
+.rank-1 { color: #1b1430; background: var(--gold); }
+
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background: transparent;
+}
+.auth-card {
+  width: min(100%, 490px);
+  padding: 30px;
+  border: 1px solid rgba(103, 238, 226, .44);
+  border-radius: 6px;
+  background: rgba(20, 15, 42, .94);
+  box-shadow: 0 24px 80px rgba(5, 3, 20, .45), inset 0 0 36px rgba(128, 82, 195, .08);
+  animation: arrive .55s ease both;
+}
+.auth-event { margin-bottom: 26px; text-align: center; }
+.auth-brand { justify-content: center; margin-bottom: 24px; }
+.auth-presenter { margin: 0; color: #d0c5ea; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .13em; }
+.auth-edition { margin: 13px 0 16px; color: var(--gold); font-family: 'Press Start 2P', monospace; font-size: 16px; line-height: 1.8; }
+.auth-edition span { color: #fff; }
+.auth-card h1 { font-family: 'Press Start 2P', monospace; font-size: 15px; line-height: 1.8; text-shadow: 2px 2px 0 #6d4caa; }
+.auth-card h1 span { color: var(--moss); }
+.auth-subtitle { margin: 12px 0 0; color: #bcb2d2; font-size: 13px; }
+.auth-access-label { margin: 0 0 14px; color: var(--moss); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em; text-align: center; }
+.auth-form { display: grid; gap: 15px; }
+.auth-form label { display: grid; gap: 7px; color: #d9d1eb; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .04em; }
+.auth-form input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 13px;
+  border: 1px solid rgba(197, 181, 230, .3);
+  border-radius: 3px;
+  outline: 0;
+  color: #fff;
+  background: rgba(7, 7, 23, .65);
+}
+.auth-form input:focus { border-color: var(--moss); box-shadow: 0 0 0 3px rgba(103, 238, 226, .1); }
+.auth-form input::placeholder { color: #807694; }
+.auth-form .primary-button, .auth-card > .primary-button {
+  width: 100%;
+  min-height: 48px;
+  justify-content: center;
+  margin-top: 4px;
+  border-radius: 3px;
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.auth-form .primary-button:disabled { opacity: .7; cursor: wait; }
+.auth-error { margin: 0; color: var(--red); font-size: 12px; }
+.auth-login-note { margin: 20px 0 0; color: #bcb2d2; font-size: 11px; text-align: center; }
+.auth-card > p { color: #c5badb; }
+.auth-card > a { display: flex; align-items: center; text-decoration: none; }
+
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .topbar { background: rgba(17, 13, 35, .95); }
+  .level-sidebar { background: #17122d; }
+  .puzzle-intro { margin-top: 42px; }
+  .puzzle-intro h1, .admin-heading h1 { font-size: 32px; }
+  .intro-number { font-size: 20px; }
+  .admin-stats > div { background: rgba(28, 21, 52, .96); }
+  .auth-shell { padding: 24px 15px; }
+  .auth-card { padding: 24px 19px; }
+  .auth-card h1 { font-size: 11px; }
+  .auth-edition { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
